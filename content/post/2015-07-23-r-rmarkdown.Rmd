@@ -1,0 +1,142 @@
+---
+title: "Low-to-middle-income groups and metropolitan have an influential impact in the 2019 Canadian Federal Election"
+author: "Jiayi Yu"
+date: 2015-07-23T21:13:14-05:00
+biliography: "reference.bib"
+categories: ["R"]
+tags: ["R Markdown", "plot", "regression"]
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+install.packages("tidyverse")
+install.packages("devtools")
+install.packages("skimr")
+devtools::install_github("hodgettsp/cesR")
+library(tidyverse)
+library(cesR)
+library(skimr)
+```
+
+# Title
+"Low-to-middle-income groups and metropolitan have an influential impact in the 2019 Canadian Federal Election"
+
+# Authorship
+"Jiayi Yu"
+
+# Date
+2020-09-25
+
+# Abstract
+"We installed some new packages to investigate the 2019 CES data.And we imported the relavant dataset and got a general overview of the Canadian Election through some handy packages. We mainly focused on the province, income and gender and made graphs to analyze them.
+As a result, we concluded that low-to-middle groups and metropolitan have an influencial impact in the Canadian Federal Election."
+# Introduction
+
+We investigated the data of 2019 Canadian Federal Election through the package
+cesR.  We found that different variables had various impact on the election.
+
+We mainly concentrated on three variable: province, income and gender. We drawed
+bar charts and histogram to observe the relationship between variables and election.
+We found that low-to-middle-income group and people who lived in the big city
+have a big impact on the election. And the gender didn't show huge difference, but 
+it showed that women have more passion to vote.
+
+
+The outline of the paper is:
+(1)Install new packages and invoke packages.
+(2)Import dataset. 
+(3)Get a general overview of the dataset.
+(4)Select targeted variable.
+(5)Make graphs and analyze data.
+(6)Discussion about the graph.
+(7)Weakness and future plan.
+
+```{r download,warning=FALSE, message=FALSE}
+cesR::get_decon()
+```
+
+# Data
+
+The CES dataset is the 2019 Canadian Election Study data. And the CES this year included a dual-mode, two-wave data collection with a rolling cross-section during the 2019 federal election campaign and a post-election follow-up survey.
+37822 people with 21 variable were counted into this dataset.
+
+```{r}
+head(decon)
+```
+
+```{r}
+skimr::skim(decon)
+class(decon$ces_code)
+```
+
+The variables we focus on are province, income and gender.
+
+```{r}
+decon<-
+  decon%>%
+  filter(income<500000)
+
+decon<-
+  decon%>%
+  select(province_territory,income,gender)
+```
+
+```{r}
+decon%>%
+  ggplot(aes(x=province_territory))+
+  geom_bar()
+```
+
+
+```{r}
+decon%>%
+  ggplot(aes(x=gender))+
+  geom_bar()
+```
+
+  
+```{r}
+decon %>%
+  ggplot(aes(x=income))+
+  geom_histogram()+
+  labs(x="Income",
+       y="Number",
+       title="Distribution of income in 2019 CES",
+       caption="Source: Stephenson, Harell,Rubenson, Loewen,
+       2020.")+
+  theme_bw()
+```
+
+# Discussion
+
+The main findings on the graph 1 are that different provinces have different impact on the election. Provinces included big city,like Ontario and Quebec, have a profound impact on the election.
+
+The second graph shows the difference between male and female is tiny, but women have more passion to vote and paricipate in the election.And i think people from other gender should be encouraged to participate in election more.
+
+
+In the final graph we find that the distribution of income is heavily skewed on the interval from fifty thousand to one hundred thousand.From that graph we could conclude that the low-to-middle-income group participate actively in election.
+
+
+
+## Weaknesses and next steps
+
+In summary, I think i have three big weaknesses.
+
+First, it's the first time for me to use R coding to complete a project. My lack of 
+basic knowledge about R limited my ability to make more suitable graphs, so i can't 
+show what i want to share perfectly.
+
+Second, I didn't design a sensible framework to show the relationship between data.
+In this project, I just used the basic framework learned from lecture.
+
+Third, my data is too much that i cannot run visdat().
+
+In the future, I would like to learn more about R coding to combine two or three variables together to analyze the influence they brought to Canadian Federal Election.
+
+#Reference 
+- Stephenson, Laura B; Harell, Allison; Rubenson, Daniel;Loewen, Peter John, 2020
+,'2019 Canadian Election Study-Online Survey',http://doi.org/10.7910/DVN/DUS88V,
+Harvard Dataverse, V1
+- Paul A. Hodgetts and Rohan Alexander (2020). ces R: Access the CES Datasets a Little Easier.. R package version 0.1.0.
+-  Hadley Wickham, Jim Hester and Winston Chang (2020). devtools: Tools to Make Developing R Packages Easier. https://devtools.r-lib.org/,https://github.com/r-lib/devtools.

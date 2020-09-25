@@ -1,2 +1,2 @@
 # Problemset1
-STA304 PS1
+STA304 Problem set 1

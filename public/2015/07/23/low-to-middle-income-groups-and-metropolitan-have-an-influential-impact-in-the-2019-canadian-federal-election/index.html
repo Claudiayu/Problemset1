@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.75.1" />
+
+
+<title>Low-to-middle-income groups and metropolitan have an influential impact in the 2019 Canadian Federal Election - Jiayi&#39;s website</title>
+<meta property="og:title" content="Low-to-middle-income groups and metropolitan have an influential impact in the 2019 Canadian Federal Election - Jiayi&#39;s website">
+
+
+  <link href='../../../../favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="../../../../css/fonts.css" media="all">
+<link rel="stylesheet" href="../../../../css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="../../../../" class="nav-logo">
+    <img src="../../../../images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="../../../../about/">About</a></li>
+    
+    <li><a href="../../../../education/">Education</a></li>
+    
+    <li><a href="https://github.com/rstudio/blogdown">GitHub</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">6 min read</span>
+    
+
+    <h1 class="article-title">Low-to-middle-income groups and metropolitan have an influential impact in the 2019 Canadian Federal Election</h1>
+
+    
+    <span class="article-date">2015-07-23</span>
+    
+
+    <div class="article-content">
+      
+
+
+<div id="title" class="section level1">
+<h1>Title</h1>
+<p>“Low-to-middle-income groups and metropolitan have an influential impact in the 2019 Canadian Federal Election”</p>
+</div>
+<div id="authorship" class="section level1">
+<h1>Authorship</h1>
+<p>“Jiayi Yu”</p>
+</div>
+<div id="date" class="section level1">
+<h1>Date</h1>
+<p>2020-09-25</p>
+</div>
+<div id="abstract" class="section level1">
+<h1>Abstract</h1>
+<p>“We installed some new packages to investigate the 2019 CES data.And we imported the relavant dataset and got a general overview of the Canadian Election through some handy packages. We mainly focused on the province, income and gender and made graphs to analyze them.
+As a result, we concluded that low-to-middle groups and metropolitan have an influencial impact in the Canadian Federal Election.”
+# Introduction</p>
+<p>We investigated the data of 2019 Canadian Federal Election through the package
+cesR. We found that different variables had various impact on the election.</p>
+<p>We mainly concentrated on three variable: province, income and gender. We drawed
+bar charts and histogram to observe the relationship between variables and election.
+We found that low-to-middle-income group and people who lived in the big city
+have a big impact on the election. And the gender didn’t show huge difference, but
+it showed that women have more passion to vote.</p>
+<p>The outline of the paper is:
+(1)Install new packages and invoke packages.
+(2)Import dataset.
+(3)Get a general overview of the dataset.
+(4)Select targeted variable.
+(5)Make graphs and analyze data.
+(6)Discussion about the graph.
+(7)Weakness and future plan.</p>
+<pre class="r"><code>cesR::get_decon()
+## TO CITE THIS SURVEY FILE: Stephenson, Laura B; Harell, Allison; Rubenson, Daniel; Loewen, Peter John, 2020, &#39;2019 Canadian Election Study - Online Survey&#39;,
+##            https://doi.org/10.7910/DVN/DUS88V, Harvard Dataverse, V1
+## LINK: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DUS88V</code></pre>
+</div>
+<div id="data" class="section level1">
+<h1>Data</h1>
+<p>The CES dataset is the 2019 Canadian Election Study data. And the CES this year included a dual-mode, two-wave data collection with a rolling cross-section during the 2019 federal election campaign and a post-election follow-up survey.
+37822 people with 21 variable were counted into this dataset.</p>
+<pre class="r"><code>head(decon)
+## # A tibble: 6 x 22
+##   ces_code citizenship yob   gender province_territ… education lr    lr_bef
+##   &lt;chr&gt;    &lt;fct&gt;       &lt;fct&gt; &lt;fct&gt;  &lt;fct&gt;            &lt;fct&gt;     &lt;chr&gt; &lt;chr&gt; 
+## 1 ces2019… Canadian c… 1989  A wom… Quebec           Master&#39;s… 2     &lt;NA&gt;  
+## 2 ces2019… Canadian c… 1998  A wom… Quebec           Master&#39;s… 2     &lt;NA&gt;  
+## 3 ces2019… Canadian c… 2000  A wom… Ontario          Some uni… 4     4     
+## 4 ces2019… Canadian c… 1998  A man  Ontario          Some uni… 7     7     
+## 5 ces2019… Canadian c… 2000  A wom… Ontario          Complete… 4     4     
+## 6 ces2019… Canadian c… 1999  A wom… Ontario          Some uni… 4     4     
+## # … with 14 more variables: lr_aft &lt;chr&gt;, religion &lt;fct&gt;,
+## #   sexuality_selected &lt;fct&gt;, sexuality_text &lt;chr&gt;, language_eng &lt;fct&gt;,
+## #   language_fr &lt;fct&gt;, language_abgl &lt;fct&gt;, employment &lt;fct&gt;, income &lt;dbl&gt;,
+## #   income_cat &lt;fct&gt;, marital &lt;fct&gt;, econ_retro &lt;fct&gt;, econ_fed &lt;fct&gt;,
+## #   econ_self &lt;fct&gt;</code></pre>
+<pre class="r"><code>skimr::skim(decon)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-2">Table 1: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">decon</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">37822</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">22</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">5</td>
+</tr>
+<tr class="odd">
+<td align="left">factor</td>
+<td align="left">16</td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ces_code</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">11</td>
+<td align="right">11</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">lr</td>
+<td align="right">8486</td>
+<td align="right">0.78</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">11</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">lr_bef</td>
+<td align="right">23319</td>
+<td align="right">0.38</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">11</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">lr_aft</td>
+<td align="right">22989</td>
+<td align="right">0.39</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">11</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">sexuality_text</td>
+<td align="right">37822</td>
+<td align="right">0.00</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: factor</strong></p>
+<table>
+<colgroup>
+<col width="18%" />
+<col width="9%" />
+<col width="13%" />
+<col width="7%" />
+<col width="8%" />
+<col width="42%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="left">ordered</th>
+<th align="right">n_unique</th>
+<th align="left">top_counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">citizenship</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="left">FALSE</td>
+<td align="right">2</td>
+<td align="left">Can: 36480, Per: 1342, Oth: 0</td>
+</tr>
+<tr class="even">
+<td align="left">yob</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="left">FALSE</td>
+<td align="right">82</td>
+<td align="left">198: 814, 199: 812, 195: 799, 195: 795</td>
+</tr>
+<tr class="odd">
+<td align="left">gender</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="left">FALSE</td>
+<td align="right">3</td>
+<td align="left">A w: 21980, A m: 15551, Oth: 291</td>
+</tr>
+<tr class="even">
+<td align="left">province_territory</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="left">FALSE</td>
+<td align="right">13</td>
+<td align="left">Ont: 14808, Que: 8399, Alb: 4481, Bri: 4354</td>
+</tr>
+<tr class="odd">
+<td align="left">education</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="left">FALSE</td>
+<td align="right">12</td>
+<td align="left">Bac: 9192, Com: 7702, Com: 5865, Som: 4394</td>
+</tr>
+<tr class="even">
+<td align="left">religion</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="left">FALSE</td>
+<td align="right">23</td>
+<td align="left">Cat: 10771, Non: 9834, Agn: 2326, Don: 2277</td>
+</tr>
+<tr class="odd">
+<td align="left">sexuality_selected</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="left">FALSE</td>
+<td align="right">6</td>
+<td align="left">Het: 32632, Bis: 1635, Hom: 1566, Pre: 1276</td>
+</tr>
+<tr class="even">
+<td align="left">language_eng</td>
+<td align="right">8609</td>
+<td align="right">0.77</td>
+<td align="left">FALSE</td>
+<td align="right">1</td>
+<td align="left">Eng: 29213</td>
+</tr>
+<tr class="odd">
+<td align="left">language_fr</td>
+<td align="right">25815</td>
+<td align="right">0.32</td>
+<td align="left">FALSE</td>
+<td align="right">1</td>
+<td align="left">Fre: 12007</td>
+</tr>
+<tr class="even">
+<td align="left">language_abgl</td>
+<td align="right">37659</td>
+<td align="right">0.00</td>
+<td align="left">FALSE</td>
+<td align="right">1</td>
+<td align="left">Abo: 163</td>
+</tr>
+<tr class="odd">
+<td align="left">employment</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="left">FALSE</td>
+<td align="right">13</td>
+<td align="left">Wor: 16124, Ret: 9008, Wor: 3415, Sel: 2517</td>
+</tr>
+<tr class="even">
+<td align="left">income_cat</td>
+<td align="right">25559</td>
+<td align="right">0.32</td>
+<td align="left">FALSE</td>
+<td align="right">9</td>
+<td align="left">Don: 2894, $30: 2559, $60: 1955, $1 : 1931</td>
+</tr>
+<tr class="odd">
+<td align="left">marital</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="left">FALSE</td>
+<td align="right">7</td>
+<td align="left">Mar: 17230, Nev: 8458, Liv: 6070, Div: 2722</td>
+</tr>
+<tr class="even">
+<td align="left">econ_retro</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="left">FALSE</td>
+<td align="right">4</td>
+<td align="left">Sta: 16774, Got: 14065, Got: 5024, Don: 1959</td>
+</tr>
+<tr class="odd">
+<td align="left">econ_fed</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="left">FALSE</td>
+<td align="right">4</td>
+<td align="left">Not: 14330, Wor: 13906, Bet: 6441, Don: 3145</td>
+</tr>
+<tr class="even">
+<td align="left">econ_self</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="left">FALSE</td>
+<td align="right">4</td>
+<td align="left">Not: 18926, Wor: 13669, Bet: 3815, Don: 1412</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<colgroup>
+<col width="13%" />
+<col width="9%" />
+<col width="13%" />
+<col width="12%" />
+<col width="12%" />
+<col width="2%" />
+<col width="5%" />
+<col width="5%" />
+<col width="6%" />
+<col width="12%" />
+<col width="5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">income</td>
+<td align="right">12266</td>
+<td align="right">0.68</td>
+<td align="right">2.640342e+56</td>
+<td align="right">4.220915e+58</td>
+<td align="right">0</td>
+<td align="right">43000</td>
+<td align="right">72000</td>
+<td align="right">110000</td>
+<td align="right">6.747658e+60</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>class(decon$ces_code)
+## [1] &quot;character&quot;</code></pre>
+<p>The variables we focus on are province, income and gender.</p>
+<pre class="r"><code>decon&lt;-
+  decon%&gt;%
+  filter(income&lt;500000)
+
+decon&lt;-
+  decon%&gt;%
+  select(province_territory,income,gender)</code></pre>
+<pre class="r"><code>decon%&gt;%
+  ggplot(aes(x=province_territory))+
+  geom_bar()</code></pre>
+<p><img src="../../../../post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<pre class="r"><code>decon%&gt;%
+  ggplot(aes(x=gender))+
+  geom_bar()</code></pre>
+<p><img src="../../../../post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre class="r"><code>decon %&gt;%
+  ggplot(aes(x=income))+
+  geom_histogram()+
+  labs(x=&quot;Income&quot;,
+       y=&quot;Number&quot;,
+       title=&quot;Distribution of income in 2019 CES&quot;,
+       caption=&quot;Source: Stephenson, Harell,Rubenson, Loewen,
+       2020.&quot;)+
+  theme_bw()
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="../../../../post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="discussion" class="section level1">
+<h1>Discussion</h1>
+<p>The main findings on the graph 1 are that different provinces have different impact on the election. Provinces included big city,like Ontario and Quebec, have a profound impact on the election.</p>
+<p>The second graph shows the difference between male and female is tiny, but women have more passion to vote and paricipate in the election.And i think people from other gender should be encouraged to participate in election more.</p>
+<p>In the final graph we find that the distribution of income is heavily skewed on the interval from fifty thousand to one hundred thousand.From that graph we could conclude that the low-to-middle-income group participate actively in election.</p>
+<div id="weaknesses-and-next-steps" class="section level2">
+<h2>Weaknesses and next steps</h2>
+<p>In summary, I think i have three big weaknesses.</p>
+<p>First, it’s the first time for me to use R coding to complete a project. My lack of
+basic knowledge about R limited my ability to make more suitable graphs, so i can’t
+show what i want to share perfectly.</p>
+<p>Second, I didn’t design a sensible framework to show the relationship between data.
+In this project, I just used the basic framework learned from lecture.</p>
+<p>Third, my data is too much that i cannot run visdat().</p>
+<p>In the future, I would like to learn more about R coding to combine two or three variables together to analyze the influence they brought to Canadian Federal Election.</p>
+<p>#Reference
+- Stephenson, Laura B; Harell, Allison; Rubenson, Daniel;Loewen, Peter John, 2020
+,‘2019 Canadian Election Study-Online Survey’,<a href="http://doi.org/10.7910/DVN/DUS88V" class="uri">http://doi.org/10.7910/DVN/DUS88V</a>,
+Harvard Dataverse, V1
+- Paul A. Hodgetts and Rohan Alexander (2020). ces R: Access the CES Datasets a Little Easier.. R package version 0.1.0.
+- Hadley Wickham, Jim Hester and Winston Chang (2020). devtools: Tools to Make Developing R Packages Easier. <a href="https://devtools.r-lib.org/,https://github.com/r-lib/devtools" class="uri">https://devtools.r-lib.org/,https://github.com/r-lib/devtools</a>.</p>
+</div>
+</div>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="../../../../index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="../../../../images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="../../../../js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>regression on Jiayi&#39;s website</title>
+    <link>/tags/regression/</link>
+    <description>Recent content in regression on Jiayi&#39;s website</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 23 Jul 2015 21:13:14 -0500</lastBuildDate><atom:link href="/tags/regression/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Low-to-middle-income groups and metropolitan have an influential impact in the 2019 Canadian Federal Election</title>
+      <link>/2015/07/23/low-to-middle-income-groups-and-metropolitan-have-an-influential-impact-in-the-2019-canadian-federal-election/</link>
+      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      
+      <guid>/2015/07/23/low-to-middle-income-groups-and-metropolitan-have-an-influential-impact-in-the-2019-canadian-federal-election/</guid>
+      <description>Title “Low-to-middle-income groups and metropolitan have an influential impact in the 2019 Canadian Federal Election”
+ Authorship “Jiayi Yu”
+ Date 2020-09-25
+ Abstract “We installed some new packages to investigate the 2019 CES data.And we imported the relavant dataset and got a general overview of the Canadian Election through some handy packages. We mainly focused on the province, income and gender and made graphs to analyze them. As a result, we concluded that low-to-middle groups and metropolitan have an influencial impact in the Canadian Federal Election.</description>
+    </item>
+    
+  </channel>
+</rss>
